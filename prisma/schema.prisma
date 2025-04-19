@@ -15,13 +15,14 @@ datasource db {
 
 model User {
   id        String    @id @default(uuid())
-  name      String
+  name      String ?
   email     String    @unique
-  password  String
+  password  String ?
   role      Role
   gyms      Gym[]     @relation("VendorGyms")
   bookings  Booking[]
   createdAt DateTime  @default(now())
+  isSubscribed Boolean @default(false)
 }
 
 model Gym {
@@ -69,7 +70,7 @@ model Payment {
 enum Role {
   ADMIN
   VENDOR
-  CUSTOMER
+  USER
 }
 
 enum BookingStatus {
